@@ -12,4 +12,5 @@ import java.util.List;
 @Transactional
 public interface CourseRepository extends JpaRepository<Course, Long> {
     List<Course> findCourseByCourseCode(String courseCode);
+    List<Course> findCourseByOpenSpotsGreaterThan(int greater);
 }
