@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CourseResponse {
     private String name;
-    private String courseCode;
-
+    private String eCode;
+    private String description;
     private boolean isAvailable;
 }

@@ -17,42 +17,40 @@ public class CourseService {
     private final CourseRepository courseRepository;
 
     @PostConstruct
-    public void loadData(){
+    public void loadData() {
         courseRepository.deleteAll();
-        if (courseRepository.count() <= 0){
+        if (courseRepository.count() <= 0) {
             Course course1 = new Course();
             course1.setName("Computer Science 101");
-            course1.setCourseCode("CS101");
+            course1.setECode("CS101");
             course1.setOpenSpots(50);
+            course1.setDescription("An introductory course covering the basics of computer science and programming.");
 
             Course course2 = new Course();
             course2.setName("Introduction to Psychology");
-            course2.setCourseCode("PSY101");
+            course2.setECode("PSY101");
             course2.setOpenSpots(40);
+            course2.setDescription("Explore the fundamental principles of psychology and human behavior.");
 
             Course course3 = new Course();
             course3.setName("Calculus I");
-            course3.setCourseCode("MATH101");
+            course3.setECode("MATH101");
             course3.setOpenSpots(25);
+            course3.setDescription("Learn the fundamentals of differential and integral calculus.");
 
             Course course4 = new Course();
             course4.setName("World History");
-            course4.setCourseCode("HIST101");
+            course4.setECode("HIST101");
             course4.setOpenSpots(35);
-
-            Course course5 = new Course();
-            course5.setName("Creative Writing");
-            course5.setCourseCode("CW102");
-            course5.setOpenSpots(20);
+            course4.setDescription("A survey of significant events and developments from ancient to modern times.");
 
             courseRepository.save(course1);
             courseRepository.save(course2);
             courseRepository.save(course3);
             courseRepository.save(course4);
-            courseRepository.save(course5);
-
         }
     }
+
 
     public List<CourseResponse> getCourses() {
         List<Course> courses = courseRepository.findAll();
@@ -60,8 +58,8 @@ public class CourseService {
     }
 
 
-    public List<CourseResponse> getCourseByCourseCode(String courseCode) {
-        List<Course> courses = courseRepository.findCourseByCourseCode(courseCode);
+    public List<CourseResponse> getCourseByECode(String eCode) {
+        List<Course> courses = courseRepository.findCourseByECode(eCode);
         return courses.stream().map(this::mapToCourseResponse).toList();
     }
 
@@ -73,9 +71,10 @@ public class CourseService {
 
     private CourseResponse mapToCourseResponse(Course course) {
         return CourseResponse.builder()
-                .courseCode(course.getCourseCode())
+                .eCode(course.getECode())
                 .name(course.getName())
                 .isAvailable(course.getOpenSpots() > 0)
+                .description(course.getDescription())
                 .build();
 
     }
