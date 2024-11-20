@@ -24,8 +24,15 @@ public class ReviewController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ReviewResponse> getAllReviewsByECode(@RequestParam List<String> eCode) {
-        return reviewService.getAllReviewsByECode(eCode);
+    public List<ReviewResponse> getReviewByECode(@RequestParam String eCode) {
+        return reviewService.getReviewByECode(eCode);
+    }
+
+    @PutMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public String updateReview(@RequestBody ReviewRequest reviewRequest) {
+        boolean r = reviewService.updateReview(reviewRequest);
+        return (r ? "Review edited" : "Review editing failed");
     }
 
     @GetMapping("/all")

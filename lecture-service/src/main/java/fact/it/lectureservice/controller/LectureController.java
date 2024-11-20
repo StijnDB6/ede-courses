@@ -28,7 +28,6 @@ public class LectureController {
         return lectureService.getLectureByLectureId(lectureId);
     }
 
-    // POST race
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public String createLecture(@RequestBody LectureRequest lectureRequest) {
@@ -36,7 +35,6 @@ public class LectureController {
         return (result ? "Lecture created successfully" : "Lecture created unsuccessfully");
     }
 
-    // DELETE race
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
     public String deleteLectureById(@RequestParam String lectureId) {

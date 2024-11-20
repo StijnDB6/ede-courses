@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -69,10 +70,25 @@ public class ReviewService {
         return reviews.stream().map(this::mapToReviewResponse).toList();
     }
 
-    public List<ReviewResponse> getAllReviewsByECode(List<String> eCode) {
+    public List<ReviewResponse> getReviewByECode(String eCode) {
         List<Review> reviews = reviewRepository.findReviewByECode(eCode);
 
         return reviews.stream().map(this::mapToReviewResponse).toList();
+    }
+
+    public boolean updateReview(ReviewRequest reviewRequest){
+        String eCode = reviewRequest.getECode();
+        Optional<Review> review = reviewRepository.findReviewByECode(eCode).stream().findFirst();
+        if (review.isPresent()) {
+            Review review1 = review.get();
+            review1.setName(reviewRequest.getName());
+            review1.setReview(reviewRequest.getReview());
+            review1.setStars(reviewRequest.getStars());
+
+            reviewRepository.save(review1);
+            return true;
+        }
+        return false;
     }
 
     private ReviewResponse mapToReviewResponse(Review review) {
