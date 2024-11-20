@@ -9,6 +9,7 @@ import fact.it.lectureservice.model.Lecture;
 import fact.it.lectureservice.repository.LectureRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -77,6 +78,10 @@ public class LectureService {
         }
     }
 
+    @Value("${courseservice.baseurl}")
+    private String courseServiceBaseUrl;
+    @Value("${reviewservice.baseurl}")
+    private String reviewServiceBaseUrl;
 
     public boolean createLecture(LectureRequest lectureRequest){
         Lecture lecture = new Lecture();
@@ -87,8 +92,7 @@ public class LectureService {
         String eCode = lectureRequest.getECode();
 
         CourseResponse[] courseResponseArray = webClient.get()
-                .uri("http://localhost:8082/api/course",
-                        uriBuilder -> uriBuilder.queryParam("eCode", eCode).build())
+                .uri("http://" + courseServiceBaseUrl + "/api/course", uriBuilder -> uriBuilder.queryParam("eCode", eCode).build())
                 .retrieve()
                 .bodyToMono(CourseResponse[].class)
                 .block();
@@ -96,8 +100,7 @@ public class LectureService {
 
 
         ReviewResponse[] reviewResponseArray = webClient.get()
-                .uri("http://localhost:8081/api/review",
-                        uriBuilder -> uriBuilder.queryParam("eCode", eCode).build())
+                .uri("http://" + reviewServiceBaseUrl + "/api/review", uriBuilder -> uriBuilder.queryParam("eCode", eCode).build())
                 .retrieve()
                 .bodyToMono(ReviewResponse[].class)
                 .block();
