@@ -42,7 +42,7 @@ class CourseServiceUnitTests {
         course1.setDescription("Derivatives");
         course1.setOpenSpots(30);
 
-        when(courseRepository.findAll()).thenReturn(Arrays.asList(course));
+        when(courseRepository.findAll()).thenReturn(Arrays.asList(course, course1));
 
         // Act
         List<CourseResponse> courses = courseService.getCourses();
