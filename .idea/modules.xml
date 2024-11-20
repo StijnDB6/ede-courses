@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/course-service/course-service.iml" filepath="$PROJECT_DIR$/course-service/course-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ede-courses.iml" filepath="$PROJECT_DIR$/.idea/ede-courses.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lecture-service/lecture-service.iml" filepath="$PROJECT_DIR$/lecture-service/lecture-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/review-service/review-service.iml" filepath="$PROJECT_DIR$/review-service/review-service.iml" />
+    </modules>
+  </component>
+</project>
