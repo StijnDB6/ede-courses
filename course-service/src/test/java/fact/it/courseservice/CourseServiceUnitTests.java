@@ -100,7 +100,7 @@ class CourseServiceUnitTests {
         assertEquals("Python course", courseResponses.get(0).getName());
         assertEquals("PY101", courseResponses.get(0).getECode());
         assertTrue(courseResponses.get(0).isAvailable());
-        assertEquals("Basics Jav", courseResponses.get(1).getDescription());
+        assertEquals("Basics Java", courseResponses.get(1).getDescription());
         assertEquals("JAVA101", courseResponses.get(1).getECode());
         assertFalse(courseResponses.get(1).isAvailable());
         assertEquals("CO101", courseResponses.get(2).getECode());
