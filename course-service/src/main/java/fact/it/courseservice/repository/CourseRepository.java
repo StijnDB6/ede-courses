@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 @Transactional
 public interface CourseRepository extends JpaRepository<Course, Long> {
-    List<Course> findCourseByECode(String eCode);
+    List<Course> findByECodeIn(List<String> eCode);
     List<Course> findCourseByOpenSpotsGreaterThan(int greater);
 }

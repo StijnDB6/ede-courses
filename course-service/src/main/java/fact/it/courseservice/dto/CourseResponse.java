@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CourseResponse {
+
+    private String id;
     private String name;
     private String eCode;
     private String description;

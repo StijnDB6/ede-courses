@@ -58,8 +58,8 @@ public class CourseService {
     }
 
 
-    public List<CourseResponse> getCourseByECode(String eCode) {
-        List<Course> courses = courseRepository.findCourseByECode(eCode);
+    public List<CourseResponse> getCoursesByECode(List<String> eCode) {
+        List<Course> courses = courseRepository.findByECodeIn(eCode);
         return courses.stream().map(this::mapToCourseResponse).toList();
     }
 
@@ -71,6 +71,7 @@ public class CourseService {
 
     private CourseResponse mapToCourseResponse(Course course) {
         return CourseResponse.builder()
+                .id(course.getId())
                 .eCode(course.getECode())
                 .name(course.getName())
                 .isAvailable(course.getOpenSpots() > 0)

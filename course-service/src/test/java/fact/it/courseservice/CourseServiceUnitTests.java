@@ -29,14 +29,14 @@ class CourseServiceUnitTests {
     public void testGetCourses() {
         // Arrange
         Course course = new Course();
-        course.setId(1L);
+        course.setId("1");
         course.setECode("Hist101");
         course.setName("History course");
         course.setDescription("Roman empire");
         course.setOpenSpots(24);
 
         Course course1 = new Course();
-        course1.setId(2L);
+        course1.setId("2");
         course1.setECode("Math101");
         course1.setName("Math course");
         course1.setDescription("Derivatives");
@@ -49,11 +49,65 @@ class CourseServiceUnitTests {
 
         // Assert
         assertEquals(2, courses.size());
+        assertEquals("2", courses.get(1).getId());
         assertEquals("Hist101", courses.get(0).getECode());
         assertEquals("History course", courses.get(0).getName());
         assertEquals("Roman empire", courses.get(0).getDescription());
 
         verify(courseRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void testGetAllCoursesByECode() {
+        // Arrange
+        Course course = new Course();
+        course.setId("1");
+        course.setECode("TEST101");
+        course.setName("Test course");
+        course.setDescription("Great test course");
+        course.setOpenSpots(20);
+
+        when(courseRepository.findByECodeIn(Arrays.asList("TEST101"))).thenReturn(Arrays.asList(course));
+
+        // Act
+        List<CourseResponse> courses = courseService.getCoursesByECode(Arrays.asList("TEST101"));
+
+        // Assert
+        assertEquals(1, courses.size());
+        assertEquals("1", courses.get(0).getId());
+        assertEquals("TEST101", courses.get(0).getECode());
+        assertEquals("Test course", courses.get(0).getName());
+        assertEquals("Great test course", courses.get(0).getDescription());
+
+        verify(courseRepository, times(1)).findByECodeIn(Arrays.asList(course.getECode()));
+    }
+
+    @Test
+    void testGetCoursesAvailable() {
+        // Arrange
+        List<Course> mockCourses = Arrays.asList(
+                new Course("1", "PY101", "Python course", "Basics Python", 15),
+                new Course("2", "JAVA101", "Java course", "Basics Java", 0),
+                new Course("3", "CO101", "COBOL course", "Basics COBOL", 25)
+        );
+        when(courseRepository.findCourseByOpenSpotsGreaterThan(0)).thenReturn(mockCourses);
+
+        // Act
+        List<CourseResponse> courseResponses = courseService.getCourseAvailable();
+
+        // Assert
+        assertEquals(mockCourses.size(), courseResponses.size());
+        assertEquals("Python course", courseResponses.get(0).getName());
+        assertEquals("PY101", courseResponses.get(0).getECode());
+        assertTrue(courseResponses.get(0).isAvailable());
+        assertEquals("Basics Java", courseResponses.get(1).getDescription());
+        assertEquals("JAVA101", courseResponses.get(1).getECode());
+        assertFalse(courseResponses.get(1).isAvailable());
+        assertEquals("CO101", courseResponses.get(2).getECode());
+        assertTrue(courseResponses.get(2).isAvailable());
+
+        verify(courseRepository, times(1)).findCourseByOpenSpotsGreaterThan(0);
+        // Add more assertions based on your specific requirements
     }
 
 }

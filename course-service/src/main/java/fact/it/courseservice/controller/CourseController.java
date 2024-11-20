@@ -24,8 +24,8 @@ public class CourseController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<CourseResponse> getCourseByECode(@RequestParam String eCode) {
-        return courseService.getCourseByECode(eCode);
+    public List<CourseResponse> getCoursesByECode(@RequestParam List<String> eCode) {
+        return courseService.getCoursesByECode(eCode);
     }
 
     @GetMapping("/available")
