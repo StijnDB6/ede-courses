@@ -43,7 +43,7 @@ spring:
 
 
         - id: review-service
-          uri: http://${SWIMMER_SERVICE_BASEURL:localhost:8082}
+          uri: http://${REVIEW_SERVICE_BASEURL:localhost:8082}
           predicates:
             - Path=/reviews
             - Method=GET
@@ -59,7 +59,7 @@ spring:
             - SetPath=/api/review
 
         - id: review-service-all
-          uri: http://${SWIMMER_SERVICE_BASEURL:localhost:8082}
+          uri: http://${REVIEW_SERVICE_BASEURL:localhost:8082}
           predicates:
             - Path=/reviews/all
             - Method=GET
