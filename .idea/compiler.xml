@@ -9,10 +9,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="lecture-service" />
         <module name="course-service" />
+        <module name="api-gateway" />
         <module name="review-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="api-gateway" target="17" />
       <module name="course-service" target="17" />
       <module name="lecture-service" target="17" />
       <module name="review-service" target="17" />
@@ -20,6 +22,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
       <module name="course-service" options="-parameters" />
       <module name="lecture-service" options="-parameters" />
       <module name="review-service" options="-parameters" />
