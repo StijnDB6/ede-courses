@@ -27,7 +27,8 @@ services:
   review-service:
     depends_on:
       - mongo-reviews
-    image: stijndb6/review-service
+    image: stijndb6/review-service:latest
+    pull_policy: always
     ports:
       - 8082:8082
     links:
@@ -55,7 +56,8 @@ services:
     depends_on:
       - review-service
       - course-service
-    image: stijndb6/lecture-service
+    image: stijndb6/lecture-service:latest
+    pull_policy: always
     ports:
       - 8080:8080
     links:
