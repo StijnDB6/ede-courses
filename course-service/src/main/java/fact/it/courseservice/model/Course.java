@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private String eCode;
     private String name;
     private String description;
