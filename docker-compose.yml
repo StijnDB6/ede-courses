@@ -39,7 +39,8 @@ services:
   course-service:
     depends_on:
       - mysql-course
-    image: stijndb6/course-service
+    image: stijndb6/course-service:latest
+    pull_policy: always
     ports:
       - 8081:8081
     links:
