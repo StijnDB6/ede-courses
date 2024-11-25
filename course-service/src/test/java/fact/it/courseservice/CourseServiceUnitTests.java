@@ -29,14 +29,14 @@ class CourseServiceUnitTests {
     public void testGetCourses() {
         // Arrange
         Course course = new Course();
-        course.setId("1");
+        course.setId(1L);
         course.setECode("Hist101");
         course.setName("History course");
         course.setDescription("Roman empire");
         course.setOpenSpots(24);
 
         Course course1 = new Course();
-        course1.setId("2");
+        course1.setId(2L);
         course1.setECode("Math101");
         course1.setName("Math course");
         course1.setDescription("Derivatives");
@@ -49,7 +49,7 @@ class CourseServiceUnitTests {
 
         // Assert
         assertEquals(2, courses.size());
-        assertEquals("2", courses.get(1).getId());
+        assertEquals(2L, courses.get(1).getId());
         assertEquals("Hist101", courses.get(0).getECode());
         assertEquals("History course", courses.get(0).getName());
         assertEquals("Roman empire", courses.get(0).getDescription());
@@ -61,7 +61,7 @@ class CourseServiceUnitTests {
     public void testGetAllCoursesByECode() {
         // Arrange
         Course course = new Course();
-        course.setId("1");
+        course.setId(1L);
         course.setECode("TEST101");
         course.setName("Test course");
         course.setDescription("Great test course");
@@ -74,7 +74,7 @@ class CourseServiceUnitTests {
 
         // Assert
         assertEquals(1, courses.size());
-        assertEquals("1", courses.get(0).getId());
+        assertEquals(1L, courses.get(0).getId());
         assertEquals("TEST101", courses.get(0).getECode());
         assertEquals("Test course", courses.get(0).getName());
         assertEquals("Great test course", courses.get(0).getDescription());
@@ -86,9 +86,9 @@ class CourseServiceUnitTests {
     void testGetCoursesAvailable() {
         // Arrange
         List<Course> mockCourses = Arrays.asList(
-                new Course("1", "PY101", "Python course", "Basics Python", 15),
-                new Course("2", "JAVA101", "Java course", "Basics Java", 0),
-                new Course("3", "CO101", "COBOL course", "Basics COBOL", 25)
+                new Course(1L, "PY101", "Python course", "Basics Python", 15),
+                new Course(2L, "JAVA101", "Java course", "Basics Java", 0),
+                new Course(3L, "CO101", "COBOL course", "Basics COBOL", 25)
         );
         when(courseRepository.findCourseByOpenSpotsGreaterThan(0)).thenReturn(mockCourses);
 
