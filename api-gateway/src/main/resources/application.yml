@@ -7,21 +7,8 @@ logging:
     org.springframework.cloud.gateway: INFO
     org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: INFO
     reactor.netty: INFO
-    org.springframework.security: TRACE
 
 spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: ${GOOGLE_CLIENTID}
-            client-secret: ${GOOGLE_CLIENTSECRET}
-            scope: openid,profile,email
-      resourceserver:
-        jwt:
-          issuer-uri: https://accounts.google.com
-          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
   cloud:
     gateway:
       routes:
@@ -31,7 +18,6 @@ spring:
             - Path=/lectures
           filters:
             - SetPath=/api/lecture
-            -
         - id: lecture-service-all
           uri: http://${LECTURE_SERVICE_BASEURL:localhost:8080}
           predicates:
@@ -39,21 +25,20 @@ spring:
             - Method=GET
           filters:
             - SetPath=/api/lecture/all
-        - id: review-service
+        - id: review-service-get
           uri: http://${REVIEW_SERVICE_BASEURL:localhost:8082}
           predicates:
             - Path=/reviews
             - Method=GET
           filters:
             - SetPath=/api/review
-        - id: review-service
+        - id: review-service-put
           uri: http://${REVIEW_SERVICE_BASEURL:localhost:8082}
           predicates:
             - Path=/reviews
             - Method=PUT
           filters:
             - SetPath=/api/review
-
         - id: review-service-all
           uri: http://${REVIEW_SERVICE_BASEURL:localhost:8082}
           predicates:
@@ -68,4 +53,3 @@ spring:
             - Method=GET
           filters:
             - SetPath=/api/course/all
-
