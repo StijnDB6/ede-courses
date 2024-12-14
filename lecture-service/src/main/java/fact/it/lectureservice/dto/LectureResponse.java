@@ -18,4 +18,7 @@ public class LectureResponse {
     private Date date;
     private String eCode;
     private String courseName;
+    private String reviewName;
+    private String reviewReview;
+    private Integer reviewStars;
 }
