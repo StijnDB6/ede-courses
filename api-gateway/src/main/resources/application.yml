@@ -10,6 +10,10 @@ logging:
     org.springframework.security: TRACE
 
 spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
   security:
     oauth2:
       client:
@@ -31,6 +35,13 @@ spring:
             - Path=/lectures
           filters:
             - SetPath=/api/lecture
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate=10
+                redis-rate-limiter.burstCapacity=20
+                redis-rate-limiter.enabled=true
+                redis-rate-limiter.keyResolver=remoteAddress
+
         - id: lecture-service-all
           uri: http://${LECTURE_SERVICE_BASEURL:localhost:8080}
           predicates:
@@ -38,6 +49,13 @@ spring:
             - Method=GET
           filters:
             - SetPath=/api/lecture/all
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate=10
+                redis-rate-limiter.burstCapacity=20
+                redis-rate-limiter.enabled=true
+                redis-rate-limiter.keyResolver=remoteAddress
+
         - id: review-service
           uri: http://${REVIEW_SERVICE_BASEURL:localhost:8082}
           predicates:
@@ -45,6 +63,13 @@ spring:
             - Method=GET
           filters:
             - SetPath=/api/review/all
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate=10
+                redis-rate-limiter.burstCapacity=20
+                redis-rate-limiter.enabled=true
+                redis-rate-limiter.keyResolver=remoteAddress
+
         - id: review-service-put
           uri: http://${REVIEW_SERVICE_BASEURL:localhost:8082}
           predicates:
@@ -52,6 +77,12 @@ spring:
             - Method=PUT
           filters:
             - SetPath=/api/review
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate=10
+                redis-rate-limiter.burstCapacity=20
+                redis-rate-limiter.enabled=true
+                redis-rate-limiter.keyResolver=remoteAddress
 
         - id: course-service
           uri: http://${COURSE_SERVICE_BASEURL:localhost:8081}
@@ -60,4 +91,9 @@ spring:
             - Method=GET
           filters:
             - SetPath=/api/course/all
-
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate=10
+                redis-rate-limiter.burstCapacity=20
+                redis-rate-limiter.enabled=true
+                redis-rate-limiter.keyResolver=remoteAddress
