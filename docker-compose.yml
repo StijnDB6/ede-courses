@@ -75,7 +75,8 @@ services:
     depends_on:
       - review-service
       - lecture-service
-    image: stijndb6/ede-api-gateway
+    image: stijndb6/ede-api-gateway:latest
+    pull_policy: always
     ports:
       - 8083:8083
     links:
