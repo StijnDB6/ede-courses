@@ -24,12 +24,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: abc123
 
-  redis:
-    image: redis:latest
-    container_name: redis
-    ports:
-      - 6379:6379
-
   review-service:
     depends_on:
       - mongo-reviews
@@ -81,7 +75,6 @@ services:
     depends_on:
       - review-service
       - lecture-service
-      - redis
     image: stijndb6/ede-api-gateway:latest
     pull_policy: always
     ports:
@@ -89,13 +82,10 @@ services:
     links:
       - review-service
       - lecture-service
-      - redis
     environment:
       REVIEW_SERVICE_BASEURL: review-service:8082
       LECTURE_SERVICE_BASEURL: lecture-service:8080
       COURSE_SERVICE_BASEURL: course-service:8081
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
 
 volumes:
   mongodb_review_data:
