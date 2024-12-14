@@ -63,7 +63,7 @@ class ReviewServiceUnitTests {
     void testUpdateReview() {
 
         ReviewRequest reviewRequest = new ReviewRequest("MATH101", "Jake", "Awesome math course", 4);
-        when(reviewRepository.findReviewByECode("MATH101"))
+        when(reviewRepository.findByECodeIn("MATH101"))
                 .thenReturn(Arrays.asList(new Review("1","MATH101", "Jake", "Awesome math course", 4)));
 
         boolean r = reviewService.updateReview(reviewRequest);
@@ -80,7 +80,7 @@ class ReviewServiceUnitTests {
         List<Review> mockReviews = Arrays.asList(
                 new Review("1", eCode, "Peter", "Not that good of a course", 2)
         );
-        when(reviewRepository.findReviewByECode(eCode)).thenReturn(mockReviews);
+        when(reviewRepository.findByECodeIn(eCode)).thenReturn(mockReviews);
         List<ReviewResponse> r = reviewService.getReviewByECode(eCode);
 
         assertEquals(mockReviews.size(), r.size());
