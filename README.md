@@ -6,7 +6,7 @@ Currently only the lectures can be accessed unauthenticated.
 
 Schema below:
 
-![img.png](img.png)
+![img_7.png](img_7.png)
 
 # Available endpoints
 
