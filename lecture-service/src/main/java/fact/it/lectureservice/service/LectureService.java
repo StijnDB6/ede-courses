@@ -116,6 +116,7 @@ public class LectureService {
                         .orElse(null);
                 if (course != null){
                     lecture.setCourseName(course.getName());
+                    lecture.setECode(course.getECode());
                 }
                 ReviewResponse review = Arrays.stream(reviewResponseArray)
                         .filter(r -> r.getECode().equals(lectureRequest.getECode()))
