@@ -29,7 +29,6 @@ spring:
           uri: http://${LECTURE_SERVICE_BASEURL:localhost:8080}
           predicates:
             - Path=/lectures
-            - Method=POST
           filters:
             - SetPath=/api/lecture
         - id: lecture-service-all
