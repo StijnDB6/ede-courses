@@ -86,8 +86,8 @@ public class LectureService {
     public boolean createLecture(LectureRequest lectureRequest){
         Lecture lecture = new Lecture();
         lecture.setLectureId(UUID.randomUUID().toString());
-        lecture.setName(lecture.getName());
-        lecture.setDate(lecture.getDate());
+        lecture.setName(lectureRequest.getName());
+        lecture.setDate(lectureRequest.getDate());
 
         String eCode = lectureRequest.getECode();
 
