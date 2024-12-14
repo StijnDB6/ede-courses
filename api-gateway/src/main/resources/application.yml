@@ -37,8 +37,8 @@ spring:
             - SetPath=/api/lecture
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 10
-                redis-rate-limiter.burstCapacity: 20
+                redis-rate-limiter.replenishRate: 2
+                redis-rate-limiter.burstCapacity: 3
                 redis-rate-limiter.keyResolver: remoteAddress
 
         - id: lecture-service-all
@@ -50,8 +50,8 @@ spring:
             - SetPath=/api/lecture/all
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 10
-                redis-rate-limiter.burstCapacity: 20
+                redis-rate-limiter.replenishRate: 2
+                redis-rate-limiter.burstCapacity: 3
                 redis-rate-limiter.keyResolver: remoteAddress
 
         - id: review-service
@@ -63,8 +63,8 @@ spring:
             - SetPath=/api/review/all
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 10
-                redis-rate-limiter.burstCapacity: 20
+                redis-rate-limiter.replenishRate: 2
+                redis-rate-limiter.burstCapacity: 3
                 redis-rate-limiter.keyResolver: remoteAddress
 
         - id: review-service-put
@@ -76,8 +76,8 @@ spring:
             - SetPath=/api/review
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 10
-                redis-rate-limiter.burstCapacity: 20
+                redis-rate-limiter.replenishRate: 2
+                redis-rate-limiter.burstCapacity: 3
                 redis-rate-limiter.keyResolver: remoteAddress
 
         - id: course-service
@@ -89,6 +89,6 @@ spring:
             - SetPath=/api/course/all
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 10
-                redis-rate-limiter.burstCapacity: 20
+                redis-rate-limiter.replenishRate: 2
+                redis-rate-limiter.burstCapacity: 3
                 redis-rate-limiter.keyResolver: remoteAddress
