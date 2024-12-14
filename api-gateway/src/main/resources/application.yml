@@ -45,14 +45,14 @@ spring:
             - Path=/reviews
             - Method=GET
           filters:
-            - SetPath=/api/review
+            - SetPath=/api/review/all
         - id: review-service-put
           uri: http://${REVIEW_SERVICE_BASEURL:localhost:8082}
           predicates:
             - Path=/reviews
             - Method=PUT
           filters:
-            - SetPath=/api/review/all
+            - SetPath=/api/review
 
         - id: course-service
           uri: http://${COURSE_SERVICE_BASEURL:localhost:8081}

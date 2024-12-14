@@ -71,14 +71,14 @@ public class ReviewService {
     }
 
     public List<ReviewResponse> getReviewByECode(String eCode) {
-        List<Review> reviews = reviewRepository.findReviewByECode(eCode);
+        List<Review> reviews = reviewRepository.findByECodeIn(eCode);
 
         return reviews.stream().map(this::mapToReviewResponse).toList();
     }
 
     public boolean updateReview(ReviewRequest reviewRequest){
         String eCode = reviewRequest.getECode();
-        Optional<Review> review = reviewRepository.findReviewByECode(eCode).stream().findFirst();
+        Optional<Review> review = reviewRepository.findByECodeIn(eCode).stream().findFirst();
         if (review.isPresent()) {
             Review review1 = review.get();
             review1.setName(reviewRequest.getName());
