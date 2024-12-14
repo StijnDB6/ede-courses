@@ -29,12 +29,13 @@ spring:
           uri: http://${LECTURE_SERVICE_BASEURL:localhost:8080}
           predicates:
             - Path=/lectures
+            - Method=POST
           filters:
             - SetPath=/api/lecture
         - id: lecture-service-all
           uri: http://${LECTURE_SERVICE_BASEURL:localhost:8080}
           predicates:
-            - Path=/lectures
+            - Path=/lectures/all
             - Method=GET
           filters:
             - SetPath=/api/lecture/all
@@ -44,14 +45,14 @@ spring:
             - Path=/reviews
             - Method=GET
           filters:
-            - SetPath=/api/review/all
+            - SetPath=/api/review
         - id: review-service-put
           uri: http://${REVIEW_SERVICE_BASEURL:localhost:8082}
           predicates:
             - Path=/reviews
             - Method=PUT
           filters:
-            - SetPath=/api/review
+            - SetPath=/api/review/all
 
         - id: course-service
           uri: http://${COURSE_SERVICE_BASEURL:localhost:8081}
